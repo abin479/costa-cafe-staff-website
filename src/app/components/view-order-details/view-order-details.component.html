@@ -1,0 +1,59 @@
+<br>
+<div class="text-center">
+  <h3>Welcome to Costa Cafe's Order Fulfillment Kiosk</h3>
+</div>
+<br>
+<div class="jumbotron">
+
+  <div class="row text-center">
+    <div class="col-md-12">
+      <h4>Order Number: {{order.orderId}}</h4>
+      <br>
+
+      <div class="row">
+        <div class="col-md-6 details-container">
+          <label class="label-title">Name:</label>
+          <label class="label-details">{{order.name}}</label>
+        </div>
+        <div class="col-md-6 details-container">
+          <div *ngIf="order?.phoneNumber !== ''">
+            <label class="label-title">Phone Number:</label>
+            <label class="label-details">{{order.phoneNumber}}</label>
+          </div>
+          <div *ngIf="order?.email !== ''">
+            <label class="label-title">Email Id:</label>
+            <label class="label-details">{{order.email}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 details-container">
+          <label class="label-title">Order Placed At:</label>
+          <label class="label-details">{{order.orderTime | date:'dd MMM, HH:MM a'}} </label>
+        </div>
+        <div class="col-md-6 details-container">
+          <label class="label-title">Order Status:</label>
+          <label class="label-details order-status" appOrderStatusHighlight [orderStatus]="order.orderStatus">{{order.orderStatus}}</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 details-container">
+          <label class="label-title">Ordered Menu Items:</label>
+          <label class="label-details">{{order.orderItems}}</label>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2 offset-md-3">
+    <button (click)="backToAllOrders()" class="btn btn-block btn-info">Back</button>
+  </div>
+  <div class="col-md-2 offset-md-2" *ngIf="order.orderStatus !== 'Ready'">
+    <button (click)="markAsReady()" class="btn btn-block btn-success">Mark As Ready</button>
+  </div>
+</div>
